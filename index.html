@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+            color: #2d2d2d;
+        }
+
+        .timer-container {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #2d2d2d;
+        }
+
+        #time {
+            font-size: 6rem;
+            font-weight: 500;
+            margin: 1.5rem 0;
+            color: #2d2d2d;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #status {
+            font-size: 1.1rem;
+            margin: 1.5rem 0;
+            color: #4a4a4a;
+            font-weight: 500;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        button {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 120px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #startBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #startBtn:hover {
+            background-color: #45a049;
+        }
+
+        #modeBtn {
+            background-color: #4169E1;
+            color: white;
+        }
+
+        #modeBtn:hover {
+            background-color: #3a5ecc;
+        }
+
+        #resetBtn {
+            background-color: #DC143C;
+            color: white;
+        }
+
+        #resetBtn:hover {
+            background-color: #c51236;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer-container">
+        <h1>POMODORO TIMER</h1>
+        <div id="time">25:00</div>
+        <div id="status">Time to focus!</div>
+        <div class="button-container">
+            <button id="startBtn">Start</button>
+            <button id="modeBtn">Work Mode</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
