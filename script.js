@@ -45,6 +45,9 @@ class PomodoroTimer {
     }
 
     start() {
+        if (this.isWorkTime) {
+            this.getFocusTask();
+        }
         this.isRunning = true;
         this.timer = setInterval(() => this.tick(), 1000);
     }
@@ -61,6 +64,9 @@ class PomodoroTimer {
         this.startBtn.textContent = 'Start';
         this.updateDisplay();
         this.statusDisplay.textContent = 'Time to focus!';
+        if (this.taskDisplay) {
+            this.taskDisplay.style.display = 'none';
+        }
     }
 
     tick() {
@@ -74,12 +80,20 @@ class PomodoroTimer {
         }
 
         this.updateDisplay();
+        console.log('Tick occurred, timeLeft:', this.timeLeft); // Debug log
     }
 
     updateDisplay() {
         const minutes = Math.floor(this.timeLeft / 60);
         const seconds = this.timeLeft % 60;
-        this.timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        // Update the display element
+        this.timeDisplay.textContent = timeString;
+        
+        // Update the page title
+        document.title = `${timeString} - Pomodoro Timer`;
+        console.log('Title updated to:', document.title); // Debug log
     }
 
     playAlert() {
@@ -99,10 +113,29 @@ class PomodoroTimer {
         this.updateDisplay();
         this.statusDisplay.textContent = this.isWorkTime ? 'Time to focus!' : 'Take a break!';
         
+        if (this.taskDisplay) {
+            this.taskDisplay.style.display = this.isWorkTime ? 'block' : 'none';
+        }
+        
         // Update icon and color
         const icon = this.modeBtn.querySelector('i');
         icon.className = this.isWorkTime ? 'fas fa-sun' : 'fas fa-moon';
         this.modeBtn.style.color = this.isWorkTime ? '#4169E1' : '#DC143C';
+    }
+
+    getFocusTask() {
+        const task = prompt('What would you like to focus on?');
+        if (task && task.trim()) {
+            this.currentTask = task.trim();
+            // Create or update task display
+            if (!this.taskDisplay) {
+                this.taskDisplay = document.createElement('div');
+                this.taskDisplay.id = 'taskDisplay';
+                this.timeDisplay.insertAdjacentElement('beforebegin', this.taskDisplay);
+            }
+            this.taskDisplay.textContent = `Focus: ${this.currentTask}`;
+            this.taskDisplay.style.display = 'block';
+        }
     }
 }
 
