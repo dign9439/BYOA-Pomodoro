@@ -19,9 +19,19 @@ class PomodoroTimer {
         this.resetBtn.addEventListener('click', () => this.reset());
         this.modeBtn.addEventListener('click', () => this.toggleMode());
 
-        // Set initial button colors
-        this.modeBtn.style.backgroundColor = '#4169E1'; // blue
+        // Remove the backgroundColor setting since we're using color now
         this.resetBtn.style.backgroundColor = '#DC143C'; // crimson
+
+        // Add initial sun icon
+        const icon = this.modeBtn.querySelector('i');
+        if (icon) {
+            icon.className = 'fas fa-sun';
+        } else {
+            // If icon doesn't exist yet, create it
+            const newIcon = document.createElement('i');
+            newIcon.className = 'fas fa-sun';
+            this.modeBtn.appendChild(newIcon);
+        }
     }
 
     toggleTimer() {
@@ -88,10 +98,11 @@ class PomodoroTimer {
         
         this.updateDisplay();
         this.statusDisplay.textContent = this.isWorkTime ? 'Time to focus!' : 'Take a break!';
-        this.modeBtn.textContent = this.isWorkTime ? 'Work Mode' : 'Rest Mode';
         
-        // Toggle button color
-        this.modeBtn.style.backgroundColor = this.isWorkTime ? '#4169E1' : '#DC143C';
+        // Update icon and color
+        const icon = this.modeBtn.querySelector('i');
+        icon.className = this.isWorkTime ? 'fas fa-sun' : 'fas fa-moon';
+        this.modeBtn.style.color = this.isWorkTime ? '#4169E1' : '#DC143C';
     }
 }
 
